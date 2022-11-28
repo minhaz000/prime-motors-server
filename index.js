@@ -83,6 +83,7 @@ app.delete('/product/:ID', verifyToken , verifyRole , async(req,res)=>{
     const result =  products.deleteOne({_id:ObjectId(productID)})
    return  res.send(result)
    }
+   
    else if(req.role==='seller'){ 
     const product = await products.findOne({_id:ObjectId(productID)})
     console.log( product)
