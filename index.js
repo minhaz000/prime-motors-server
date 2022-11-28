@@ -109,7 +109,6 @@ app.get('/booking' ,verifyToken, async(req,res)=>{
 
 app.post('/booking', async(req,res)=>{
   const bookingData = req.body.bookingData
-  
    products.updateOne({_id:ObjectId(bookingData.product_id)},{$set:{booked:true }},{upsert:true} )
     bookings.insertOne(bookingData)
     res.send(" booked successfully")
@@ -137,7 +136,6 @@ app.get('/sellers', verifyToken , verifyRole, async(req,res)=>{
       return res.send(result)
      }
 })
-
 app.post('/verify-user/:ID', verifyToken , verifyRole,async(req,res)=>{
       const UserID = req.params.ID
       if( req.role === 'admin') {
@@ -162,6 +160,7 @@ app.post('/get-token',async(req,res)=>{
     
    }
 })
+
 app.get('/get-user-role', verifyToken , async(req,res)=>{
   const email = req.query.email
   const result = await users.findOne({email: email})
