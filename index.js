@@ -123,6 +123,7 @@ app.post('/advertise/:ID',  async(req,res)=>{
   const result = await products.updateOne({_id:ObjectId(productID)},{$set:{advertise:true}},{upsert:true})
   res.send( result)
 })
+
 app.get('/buyers', verifyToken , verifyRole, async(req,res)=>{  
      if(req.role === 'admin') { 
       const result = await users.find({$and:[{role:{$ne:'admin'}},{role:{$ne:'seller'}}]}).toArray()
