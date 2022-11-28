@@ -83,7 +83,7 @@ app.delete('/product/:ID', verifyToken , verifyRole , async(req,res)=>{
     const result =  products.deleteOne({_id:ObjectId(productID)})
    return  res.send(result)
    }
-   
+
    else if(req.role==='seller'){ 
     const product = await products.findOne({_id:ObjectId(productID)})
     console.log( product)
@@ -106,6 +106,7 @@ app.get('/booking' ,verifyToken, async(req,res)=>{
   const result = await bookings.find({email:email}).toArray() 
   res.send(result)
 })
+
 app.post('/booking', async(req,res)=>{
   const bookingData = req.body.bookingData
   
