@@ -129,7 +129,6 @@ app.get('/buyers', verifyToken , verifyRole, async(req,res)=>{
       return res.send( result)
      }
 })
-
 app.get('/sellers', verifyToken , verifyRole, async(req,res)=>{  
      if(req.role==='admin') { 
       const result = await users.find({role:'seller'}).toArray()
