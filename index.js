@@ -112,6 +112,15 @@ app.post('/booking', async(req,res)=>{
     bookings.insertOne(bookingData)
     res.send(" booked successfully")
   })
+app.get('/advertise',async(req,res)=>{
+  const result = await products.find({$and:[{advertise:{$eq:true}},{booked:{$ne:true}}]}).toArray()
+  res.send(result)
+})  
+app.post('/advertise/:ID',  async(req,res)=>{
+  const productID = req.params.ID
+  const result = await products.updateOne({_id:ObjectId(productID)},{$set:{advertise:true}},{upsert:true})
+  res.send( result)
+})
 app.get('/buyers', verifyToken , verifyRole, async(req,res)=>{  
      if(req.role === 'admin') { 
       const result = await users.find({$and:[{role:{$ne:'admin'}},{role:{$ne:'seller'}}]}).toArray()
